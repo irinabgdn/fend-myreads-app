@@ -1,10 +1,17 @@
 import React, { Component} from 'react'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
-import escapeRegExp from 'escape-string-regexp'
 import { Link } from 'react-router-dom'
 
+import PropTypes from 'prop-types'
+import sortBy from 'sort-by'
+
 class Search extends Component {
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        setShelf: PropTypes.func.isRequired
+    }
+
     state = {
         query: '',
         searchResults: []
@@ -18,11 +25,12 @@ class Search extends Component {
     getSearchResults = (query) => {
         if (query) {
             BooksAPI.search(query).then((searchResults) => {
-                (searchResults.error) ? this.setState( { searchResults: [] } ) : this.setState( { searchResults })
+                (searchResults.error) ? this.setState( { searchResults: [] } ) : this.setState( { searchResults: searchResults.sort(sortBy('title')) })
             })
         } else {
             this.setState({ searchResults: [] })
         }
+        
     }
 
     render() {        
@@ -43,19 +51,19 @@ class Search extends Component {
 
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        { this.state.searchResults.map(result => {
-                            let currentShelf="none"
+                        {this.state.searchResults.map(result => {
+                            result.shelf="none"
 
                             this.props.books.map( book => (
-                                book.id === result.id ? currentShelf= book.shelf : ""
+                                book.id === result.id ? result.shelf=book.shelf : ""
                             ))
 
                             return (
                                 <li key={result.id}>
                                     <Book
-                                        book= {result}
-                                        setShelf = {this.props.setShelf}
-                                        shelf={currentShelf}
+                                        book={result}
+                                        setShelf={this.props.setShelf}
+                                        shelf={result.shelf}
                                     />
                                 </li>
                             )

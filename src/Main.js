@@ -2,7 +2,14 @@ import React, { Component} from 'react'
 import Book from './Book'
 import { Link } from 'react-router-dom'
 
-class Search extends Component {
+import PropTypes from 'prop-types'
+
+class Main extends Component {
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        setShelf: PropTypes.func.isRequired
+    }
+
     render() {
         return(
             <div className="list-books">
@@ -20,8 +27,8 @@ class Search extends Component {
                                 .map(book => (
                                     <li key={book.id}>
                                         <Book 
-                                            book= {book}
-                                            setShelf = {this.props.setShelf}
+                                            book={book}
+                                            setShelf={this.props.setShelf}
                                             shelf='currentlyReading'
                                         />
                                     </li>
@@ -79,5 +86,5 @@ class Search extends Component {
     }
 }
 
-export default Search 
+export default Main 
 
