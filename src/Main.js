@@ -22,6 +22,7 @@ class Search extends Component {
                                         <Book 
                                             book= {book}
                                             setShelf = {this.props.setShelf}
+                                            shelf='currentlyReading'
                                         />
                                     </li>
                                 ))
@@ -40,6 +41,7 @@ class Search extends Component {
                                         <Book
                                             book= {book}
                                             setShelf = {this.props.setShelf}
+                                            shelf='wantToRead'
                                         />
                                     </li>
                                 ))
@@ -58,6 +60,7 @@ class Search extends Component {
                                         <Book
                                             book= {book}
                                             setShelf = {this.props.setShelf}
+                                            shelf='read'
                                         />
                                     </li>
                                 ))
