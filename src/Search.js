@@ -17,28 +17,40 @@ class Search extends Component {
         searchResults: []
     }
     
+    // Re-render when user input
     updateQuery = (query) => {
         this.setState({ query})
         this.getSearchResults(query)
     }
     
+    // Fetch results from database based on search input
     getSearchResults = (query) => {
         if (query) {
             BooksAPI.search(query).then((searchResults) => {
-                (searchResults.error) ? this.setState( { searchResults: [] } ) : this.setState( { searchResults: searchResults.sort(sortBy('title')) })
+                // Assure response even if error occures
+                (searchResults.error) ? this.setState( { searchResults: [] } ) 
+                // Return results sorted by book titles
+                : this.setState( { searchResults: searchResults.sort(sortBy('title')) })
             })
         } else {
             this.setState({ searchResults: [] })
         }
         
     }
-
-    render() {        
+/**
+ *
+ *
+ * @returns
+ * @memberof Search
+ */
+render() {        
         return (
             <div className="search-books">
                 <div className="search-books-bar">
+                    {/* Return to main page - button */}
                     <Link to="/" className="close-search">Close</Link>
                     
+                    {/* Search input */}
                     <div className="search-books-input-wrapper">
                         <input 
                             type="text"
@@ -50,14 +62,19 @@ class Search extends Component {
                 </div>
 
                 <div className="search-books-results">
+                    {/* Show number the number of results */}
+                    {this.state.query && (<p className="search-results-counter">Your search for {this.state.query} has {this.state.searchResults.length} results.</p>)}
+                    
+                    {/* Show results */}
                     <ol className="books-grid">
                         {this.state.searchResults.map(result => {
+                            // Set default shelf of searched results
                             result.shelf="none"
-
+                            // Check if the book is already on a shelf
                             this.props.books.map( book => (
                                 book.id === result.id ? result.shelf=book.shelf : ""
                             ))
-
+                            // Render search results
                             return (
                                 <li key={result.id}>
                                     <Book

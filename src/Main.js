@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
+// Main page component
 class Main extends Component {
     static propTypes = {
         books: PropTypes.array.isRequired,
@@ -16,67 +17,73 @@ class Main extends Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
+                
+                {/* Currently reading shelf */}
                 <div className="list-books-content">
-                    <div>
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Currently Reading</h2>
                         <div className="bookshelf-books">
-                        <ol className="books-grid">
-                            {this.props.books
-                                .filter(book => book.shelf === 'currentlyReading')
-                                .map(book => (
-                                    <li key={book.id}>
-                                        <Book 
-                                            book={book}
-                                            setShelf={this.props.setShelf}
-                                            shelf='currentlyReading'
-                                        />
-                                    </li>
-                                ))
-                            }
-                        </ol>
+                            <ol className="books-grid">
+                                {this.props.books
+                                    .filter(book => book.shelf === 'currentlyReading')
+                                    .map(book => (
+                                        <li key={book.id}>
+                                            <Book 
+                                                book={book}
+                                                setShelf={this.props.setShelf}
+                                                shelf='currentlyReading'
+                                            />
+                                        </li>
+                                    ))
+                                }
+                            </ol>
                         </div>
                     </div>
+
+                    {/* Want to read shelf */}
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Want to Read</h2>
                         <div className="bookshelf-books">
-                        <ol className="books-grid">
-                            {this.props.books
-                                .filter(book => book.shelf === 'wantToRead')
-                                .map(book => (
-                                    <li key={book.id}>
-                                        <Book
-                                            book= {book}
-                                            setShelf = {this.props.setShelf}
-                                            shelf='wantToRead'
-                                        />
-                                    </li>
-                                ))
-                            }
-                        </ol>
+                            <ol className="books-grid">
+                                {this.props.books
+                                    .filter(book => book.shelf === 'wantToRead')
+                                    .map(book => (
+                                        <li key={book.id}>
+                                            <Book
+                                                book= {book}
+                                                setShelf = {this.props.setShelf}
+                                                shelf='wantToRead'
+                                            />
+                                        </li>
+                                    ))
+                                }
+                            </ol>
                         </div>
                     </div>
+
+                    {/* Read shelf */}
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Read</h2>
                         <div className="bookshelf-books">
-                        <ol className="books-grid">
-                            {this.props.books
-                                .filter(book => book.shelf === 'read')
-                                .map(book => (
-                                    <li key={book.id}>
-                                        <Book
-                                            book= {book}
-                                            setShelf = {this.props.setShelf}
-                                            shelf='read'
-                                        />
-                                    </li>
-                                ))
-                            }
-                        </ol>
+                            <ol className="books-grid">
+                                {this.props.books
+                                    .filter(book => book.shelf === 'read')
+                                    .map(book => (
+                                        <li key={book.id}>
+                                            <Book
+                                                book= {book}
+                                                setShelf = {this.props.setShelf}
+                                                shelf='read'
+                                            />
+                                        </li>
+                                    ))
+                                }
+                            </ol>
                         </div>
                     </div>
-                    </div>
                 </div>
+
+                {/* Link to search page */}
                 <div className="open-search">
                     <Link to="/search" 
                     >Add a book</Link>

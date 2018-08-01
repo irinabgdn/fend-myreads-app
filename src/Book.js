@@ -8,6 +8,7 @@ class Book extends Component {
     }
 
     render() {
+        // Assure books are render even if information is incomplete
         let thumb = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''
         let authors = this.props.book.authors ? this.props.book.authors : ''
         
@@ -16,6 +17,7 @@ class Book extends Component {
                 <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url('${thumb}')`}}></div>
                     <div className="book-shelf-changer">
+                        {/* Change shelf based on user option */}
                         <select 
                             onChange={(e) => this.props.setShelf(this.props.book, e.target.value)}
                             value={this.props.shelf}

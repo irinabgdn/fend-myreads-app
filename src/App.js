@@ -11,16 +11,19 @@ class BooksApp extends React.Component {
     books: []
   }
 
+  // Fetch books from database
   getAllBooks = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
 
+  // Prepare controlled component for fetching data
   componentDidMount() {
     this.getAllBooks()
   }
 
+  // Method to update book shelf in database
   setShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
     this.getAllBooks()
@@ -30,12 +33,14 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
+          // Main page component
           <Main
             books={this.state.books}
             setShelf={this.setShelf}
           />
         )}/>
         <Route path='/search' render={() => (
+          // Search page component
           <Search
             books={this.state.books}
             setShelf={this.setShelf}
