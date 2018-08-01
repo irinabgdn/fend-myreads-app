@@ -17,8 +17,10 @@ body, .app {
 }
 .list-books-title h1 {
   font-weight: 400;
+  font-size: 2em;
   margin: 0;
   color: white;
+  font-family: 'Lobster', cursive;
 }
 
 .list-books-content {
@@ -38,6 +40,7 @@ body, .app {
 
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
+  font-size: 1.2em;
 }
 .bookshelf-books {
   text-align: center;

@@ -1,6 +1,11 @@
 import React, { Component} from 'react'
+import PropTypes from 'prop-types'
 
 class Book extends Component {
+    static propTypes = {
+        setShelf: PropTypes.func.isRequired,
+        shelf: PropTypes.string.isRequired
+    }
 
     render() {
         let thumb = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''
