@@ -33,7 +33,7 @@ The project is built upon the [React](https://reactjs.org/) framework.
 
 The BookAPI is provided by [Udacity](www.udacity.com).
 
-Also, the started code was provided by [Udacity](www.udacity.com).
+Also, the starter code was provided by [Udacity](www.udacity.com).
 
 ## Author
 Irina Bogdan - Udacity FEND Student 2018
